@@ -2,14 +2,21 @@ from flask import Flask
 from config import config
 from database.mongodb import client
 from routes.auth import auth_bp
+from routes.pdf import pdf_bp
+from routes.chat import chat_bp
+from routes.profile import profile_bp
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
 app.register_blueprint(auth_bp)
+app.register_blueprint(pdf_bp, url_prefix="/pdf")
+app.register_blueprint(chat_bp, url_prefix="/chat")
+app.register_blueprint(profile_bp, url_prefix="/profile")
 
 @app.route("/")
 def home():
     return "AI PDF Assistant Backend Running"
+
 
 if __name__ == "__main__":
     try:

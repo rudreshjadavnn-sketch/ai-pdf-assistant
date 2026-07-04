@@ -4,71 +4,54 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard | AI PDF Assistant</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <title>AI PDF Assistant</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- Mobile Overlay -->
-<div class="overlay" id="overlay" onclick="closeMobileSidebar()"></div>
+<div class="overlay"
+     id="overlay"></div>
 
 <div class="dashboard">
 
-    <!-- ================= Sidebar ================= -->
+    <!-- ================= SIDEBAR ================= -->
 
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar"
+           id="sidebar">
 
-        <div class="sidebar-header">
+        <div class="sidebar-top">
 
             <div class="logo">
 
-                <div class="logo-icon">AI</div>
+                <div class="logo-icon">
 
-                <span class="logo-text">
+                    AI
+
+                </div>
+
+                <div class="logo-text">
+
                     AI PDF Assistant
-                </span>
+
+                </div>
 
             </div>
 
-            <button
-                class="collapse-btn"
-                onclick="toggleDesktopSidebar()">
-
-                <span class="material-symbols-outlined">
-                    keyboard_double_arrow_left
-                </span>
-
-            </button>
-
         </div>
 
-        <!-- Search -->
-
-        <div class="search-box">
-
-            <span class="material-symbols-outlined">
-                search
-            </span>
-
-            <input
-                type="text"
-                placeholder="Search PDF..."
-                id="searchPdf">
-
-        </div>
-
-        <!-- New Chat -->
-
-        <button
-            class="new-chat-btn"
-            id="newChatBtn">
+        <button id="newChatBtn"
+                class="new-chat">
 
             <span class="material-symbols-outlined">
 
@@ -80,13 +63,30 @@
 
         </button>
 
-        <!-- History -->
+        <div class="search-box">
 
-        <div class="history">
+            <span class="material-symbols-outlined">
+
+                search
+
+            </span>
+
+            <input type="text"
+                   id="searchInput"
+                   placeholder="Search PDF">
+
+        </div>
+
+        <div class="history"
+             id="historyContainer">
 
             <div class="history-group">
 
-                <h4>Today</h4>
+                <div class="group-title">
+
+                    Today
+
+                </div>
 
                 <div class="history-item active">
 
@@ -116,7 +116,11 @@
 
             <div class="history-group">
 
-                <h4>Yesterday</h4>
+                <div class="group-title">
+
+                    Yesterday
+
+                </div>
 
                 <div class="history-item">
 
@@ -134,7 +138,11 @@
 
             <div class="history-group">
 
-                <h4>01/07/2026</h4>
+                <div class="group-title">
+
+                    01/07/2026
+
+                </div>
 
                 <div class="history-item">
 
@@ -152,35 +160,32 @@
 
         </div>
 
-        <!-- Profile -->
+        <div class="profile">
 
-        <div class="profile-section">
+            <div class="avatar">
 
-            <div
-                class="profile"
-                onclick="toggleProfileMenu()">
+                RN
 
-                <div class="avatar">
+            </div>
 
-                    R
+            <div class="profile-info">
+
+                <div id="userName">
+
+                    Rudresh
+
+                </div>
+
+                <div id="userEmail">
+
+                    rudresh@gmail.com
 
                 </div>
 
-                <div class="profile-details">
+            </div>
 
-                    <h3 id="profileName">
-
-                        Rudresh
-
-                    </h3>
-
-                    <p id="profileEmail">
-
-                        rudresh@gmail.com
-
-                    </p>
-
-                </div>
+            <button id="profileButton"
+                    class="icon-btn">
 
                 <span class="material-symbols-outlined">
 
@@ -188,113 +193,37 @@
 
                 </span>
 
-            </div>
-
-            <div
-                class="profile-menu"
-                id="profileMenu">
-
-                <a href="#">
-
-                    <span class="material-symbols-outlined">
-
-                        person
-
-                    </span>
-
-                    Profile
-
-                </a>
-
-                <a href="#">
-
-                    <span class="material-symbols-outlined">
-
-                        settings
-
-                    </span>
-
-                    Settings
-
-                </a>
-
-                <a href="#">
-
-                    <span class="material-symbols-outlined">
-
-                        dark_mode
-
-                    </span>
-
-                    Theme
-
-                </a>
-
-                <a href="#">
-
-                    <span class="material-symbols-outlined">
-
-                        logout
-
-                    </span>
-
-                    Logout
-
-                </a>
-
-            </div>
+            </button>
 
         </div>
 
     </aside>
 
-    <!-- ================= Main ================= -->
+    <!-- ================= MAIN ================= -->
 
-    <main class="main-content">
-
-        <!-- Top Bar -->
+    <main class="main">
 
         <header class="topbar">
 
-            <div class="left">
+            <button id="menuButton"
+                    class="icon-btn">
 
-                <button
-                    class="menu-btn"
-                    onclick="toggleMobileSidebar()">
+                <span class="material-symbols-outlined">
 
-                    <span class="material-symbols-outlined">
+                    menu
 
-                        menu
+                </span>
 
-                    </span>
+            </button>
 
-                </button>
+            <h2 id="chatTitle">
 
-                <h2 id="currentPdf">
+                AI PDF Assistant
 
-                    AI PDF Assistant
-
-                </h2>
-
-            </div>
-
-            <div class="right">
-
-                <select id="themeSelect">
-
-                    <option>System</option>
-
-                    <option>Light</option>
-
-                    <option>Dark</option>
-
-                </select>
-
-            </div>
+            </h2>
 
         </header>
-
-        <!-- Upload Area -->
+                <!-- ================= Upload ================= -->
 
         <section
             class="upload-section"
@@ -302,17 +231,18 @@
 
             <div class="upload-card">
 
-                <span class="material-symbols-outlined upload-icon">
+                <span
+                    class="material-symbols-outlined upload-icon">
 
                     upload_file
 
                 </span>
 
-                <h2>
+                <h1>
 
-                    Upload PDF
+                    Upload your PDF
 
-                </h2>
+                </h1>
 
                 <p>
 
@@ -327,7 +257,7 @@
                     hidden>
 
                 <button
-                    onclick="document.getElementById('pdfInput').click()">
+                    id="browseBtn">
 
                     Browse PDF
 
@@ -337,79 +267,203 @@
 
         </section>
 
-        <!-- Chat -->
+        <!-- ================= Chat ================= -->
 
         <section
             class="chat-container"
             id="chatContainer">
 
-            <!-- User -->
+            <div class="welcome">
 
-            <div class="message user">
+                <span
+                    class="material-symbols-outlined">
 
-                <div class="bubble">
+                    auto_awesome
 
-                    What is Python?
+                </span>
 
-                </div>
+                <h2>
 
-            </div>
+                    Welcome to AI PDF Assistant
 
-            <!-- AI -->
+                </h2>
 
-            <div class="message ai">
+                <p>
 
-                <div class="bubble">
+                    Upload a PDF and start asking questions.
 
-                    Python is a high-level programming language...
-
-                </div>
+                </p>
 
             </div>
 
         </section>
 
-        <!-- Typing -->
+        <!-- ================= Typing ================= -->
 
         <div
             class="typing"
             id="typingIndicator">
 
             <span></span>
-
             <span></span>
-
             <span></span>
 
         </div>
 
-        <!-- Bottom -->
+        <!-- ================= Bottom ================= -->
 
-        <div class="bottom-input">
+        <footer
+            class="bottom-bar">
 
-            <textarea
-                id="question"
-                rows="1"
-                placeholder="Ask anything from your PDF..."></textarea>
+            <div
+                class="input-box">
 
-            <button
-                id="sendBtn">
+                <textarea
+                    id="question"
+                    rows="1"
+                    placeholder="Ask anything from your PDF..."
+                    disabled>
 
-                <span class="material-symbols-outlined">
+                </textarea>
 
-                    send
+                <button
+                    id="sendBtn"
+                    disabled>
 
-                </span>
+                    <span
+                        class="material-symbols-outlined">
 
-            </button>
+                        send
 
-        </div>
+                    </span>
+
+                </button>
+
+            </div>
+
+        </footer>
 
     </main>
 
 </div>
+<!-- ================= Profile Modal ================= -->
 
+<div
+    class="profile-modal"
+    id="profileModal">
+
+    <div
+        class="profile-card">
+
+        <button
+            id="closeProfile"
+            class="close-profile">
+
+            <span
+                class="material-symbols-outlined">
+
+                close
+
+            </span>
+
+        </button>
+
+        <div
+            class="profile-avatar">
+
+            RN
+
+        </div>
+
+        <h2
+            id="modalUserName">
+
+            Rudresh
+
+        </h2>
+
+        <p
+            id="modalUserEmail">
+
+            rudresh@gmail.com
+
+        </p>
+
+        <div
+            class="profile-divider">
+
+        </div>
+
+        <div
+            class="theme-section">
+
+            <h3>
+
+                Theme
+
+            </h3>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="theme"
+                    value="system"
+                    checked>
+
+                System
+
+            </label>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="theme"
+                    value="light">
+
+                Light
+
+            </label>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="theme"
+                    value="dark">
+
+                Dark
+
+            </label>
+
+        </div>
+
+        <div
+            class="profile-divider">
+
+        </div>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            <span
+                class="material-symbols-outlined">
+
+                logout
+
+            </span>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</div>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 </body>
+
 </html>

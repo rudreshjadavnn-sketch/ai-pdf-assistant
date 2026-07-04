@@ -5,7 +5,8 @@ from config import config
 def generate_token(user_id):
     payload = {
         "user_id": str(user_id),
-        "exp": datetime.utcnow() + timedelta(days=7)
+        "exp": datetime.utcnow() + timedelta(days=7),
+        "iat": datetime.utcnow()
     }
 
     token = jwt.encode(
@@ -16,12 +17,12 @@ def generate_token(user_id):
 
     return token
 
-def verify_token(token):
+def decode_token(token):
     try:
         payload = jwt.decode(
             token,
             config.SECRET_KEY,
-            algorithm = ["HS256"]
+            algorithms = ["HS256"]
         )
 
         return payload
