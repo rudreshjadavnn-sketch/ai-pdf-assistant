@@ -9,6 +9,7 @@ class ChatService:
     @staticmethod
     def save_chat(
         user_id,
+        document_id,
         question,
         answer
     ):
@@ -16,6 +17,8 @@ class ChatService:
         chat = Chat.create_chat(
 
             user_id=user_id,
+
+            document_id=document_id,
 
             question=question,
 
@@ -28,12 +31,13 @@ class ChatService:
         return True
 
     @staticmethod
-    def get_chat_history(user_id):
+    def get_chat_history(user_id,document_id):
 
         chats = chats_collection.find(
 
             {
-                "user_id": user_id
+                "user_id": user_id,
+                "document_id": document_id
             }
 
         ).sort(
@@ -62,48 +66,6 @@ class ChatService:
         return {
             "history": history
         },200
-
-    @staticmethod
-    def delete_chat(chat_id):
-
-        chats_collection.delete_one(
-
-            {
-                "_id": chat_id
-            }
-
-        )
-
-        return True
-    @staticmethod
-    def get_chat_history(user_id):
-
-        chats = chats_collection.find(
-            {
-                "user_id": user_id
-            }
-        ).sort(
-            "created_at",
-            1
-        )
-
-        history = []
-
-        for chat in chats:
-
-            history.append({
-
-                "question": chat["question"],
-
-                "answer": chat["answer"]
-
-            })
-
-        return {
-
-            "history": history
-
-        }, 200
     
     @staticmethod
     def delete_chat(user_id, chat_id):

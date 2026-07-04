@@ -38,7 +38,11 @@ If the answer is not available, replay:
 Context:{context}
 Question:{question}
 """
-        response = AIService.gemini.generate_content(
-            prompt
-        )
-        return response.text
+        try:
+            response = AIService.gemini.generate_content(prompt)
+            return response.text
+        except Exception:
+            return {
+                "Gemini API Quote Exceeded."
+                "Please wait and try again."
+            }

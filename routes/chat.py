@@ -59,7 +59,7 @@ def ask_question():
         return jsonify({
             "message": "Question is required"
         }), 400
-
+    
     answer = AIService.ask_question(
         user_id,
         document_id,
@@ -68,6 +68,7 @@ def ask_question():
 
     ChatService.save_chat(
         user_id=user_id,
+        document_id=document_id,
         question=question,
         answer=answer
     )
@@ -104,9 +105,10 @@ def get_history():
         return jsonify({
             "message": "Invalid token"
         }), 401
-
+    document_id = request.args.get("document_id")
     response, status = ChatService.get_chat_history(
-        payload["user_id"]
+        payload["user_id"],
+        document_id
     )
 
     return jsonify(response), status

@@ -1,366 +1,246 @@
-// ===========================================
-// ELEMENTS
-// ===========================================
+    // ===========================================
+    // ELEMENTS
+    // ===========================================
 
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
 
-const menuButton = document.getElementById("menuButton");
+    const menuButton = document.getElementById("menuButton");
 
-const profileButton = document.getElementById("profileButton");
-const profileModal = document.getElementById("profileModal");
-const closeProfile = document.getElementById("closeProfile");
+    const profileButton = document.getElementById("profileButton");
+    const profileModal = document.getElementById("profileModal");
+    const closeProfile = document.getElementById("closeProfile");
 
-const browseBtn = document.getElementById("browseBtn");
-const pdfInput = document.getElementById("pdfInput");
+    const browseBtn = document.getElementById("browseBtn");
+    const pdfInput = document.getElementById("pdfInput");
 
-const uploadSection = document.getElementById("uploadSection");
+    const uploadSection = document.getElementById("uploadSection");
 
-const question = document.getElementById("question");
-const sendBtn = document.getElementById("sendBtn");
+    const question = document.getElementById("question");
+    const sendBtn = document.getElementById("sendBtn");
 
-const typingIndicator = document.getElementById("typingIndicator");
+    const typingIndicator = document.getElementById("typingIndicator");
 
-const chatContainer = document.getElementById("chatContainer");
+    const chatContainer = document.getElementById("chatContainer");
 
-const searchInput = document.getElementById("searchInput");
+    const searchInput = document.getElementById("searchInput");
 
-const historyContainer = document.getElementById("historyContainer");
+    const historyContainer = document.getElementById("historyContainer");
 
-const chatTitle = document.getElementById("chatTitle");
-let selectedDocumentId = null;
+    const chatTitle = document.getElementById("chatTitle");
+    let selectedDocumentId = null;
 
-// ===========================================
-// MOBILE SIDEBAR
-// ===========================================
+    // ===========================================
+    // MOBILE SIDEBAR
+    // ===========================================
 
-menuButton.addEventListener("click", () => {
+    menuButton.addEventListener("click", () => {
 
-    sidebar.classList.add("show");
+        sidebar.classList.add("show");
 
-    overlay.classList.add("show");
-
-});
-
-overlay.addEventListener("click", closeSidebar);
-
-function closeSidebar(){
-
-    sidebar.classList.remove("show");
-
-    overlay.classList.remove("show");
-
-}
-
-window.addEventListener("resize",()=>{
-
-    if(window.innerWidth>768){
-
-        closeSidebar();
-
-    }
-
-});
-
-
-// ===========================================
-// PROFILE MODAL
-// ===========================================
-
-profileButton.addEventListener("click",()=>{
-
-    profileModal.classList.add("show");
-
-});
-
-closeProfile.addEventListener("click",()=>{
-
-    profileModal.classList.remove("show");
-
-});
-
-profileModal.addEventListener("click",(e)=>{
-
-    if(e.target===profileModal){
-
-        profileModal.classList.remove("show");
-
-    }
-
-});
-
-
-// ===========================================
-// ESC KEY
-// ===========================================
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Escape"){
-
-        profileModal.classList.remove("show");
-
-        closeSidebar();
-
-    }
-
-});
-
-
-// ===========================================
-// THEME
-// ===========================================
-
-const radios =
-document.querySelectorAll(
-'input[name="theme"]'
-);
-
-window.addEventListener("load",()=>{
-
-    const savedTheme =
-    localStorage.getItem("theme") || "system";
-
-    document.querySelector(
-`input[value="${savedTheme}"]`
-).checked=true;
-
-    applyTheme(savedTheme);
-
-});
-
-radios.forEach(r=>{
-
-    r.addEventListener("change",()=>{
-
-        localStorage.setItem("theme",r.value);
-
-        applyTheme(r.value);
+        overlay.classList.add("show");
 
     });
 
-});
+    overlay.addEventListener("click", closeSidebar);
 
-function applyTheme(theme){
+    function closeSidebar(){
 
-    document.body.classList.remove("dark");
+        sidebar.classList.remove("show");
 
-    if(theme==="dark"){
-
-        document.body.classList.add("dark");
+        overlay.classList.remove("show");
 
     }
 
-    if(theme==="system"){
+    window.addEventListener("resize",()=>{
 
-        if(window.matchMedia("(prefers-color-scheme:dark)").matches){
+        if(window.innerWidth>768){
+
+            closeSidebar();
+
+        }
+
+    });
+
+
+    // ===========================================
+    // PROFILE MODAL
+    // ===========================================
+
+    profileButton.addEventListener("click",()=>{
+
+        profileModal.classList.add("show");
+
+    });
+
+    closeProfile.addEventListener("click",()=>{
+
+        profileModal.classList.remove("show");
+
+    });
+
+    profileModal.addEventListener("click",(e)=>{
+
+        if(e.target===profileModal){
+
+            profileModal.classList.remove("show");
+
+        }
+
+    });
+
+
+    // ===========================================
+    // ESC KEY
+    // ===========================================
+
+    document.addEventListener("keydown",(e)=>{
+
+        if(e.key==="Escape"){
+
+            profileModal.classList.remove("show");
+
+            closeSidebar();
+
+        }
+
+    });
+
+
+    // ===========================================
+    // THEME
+    // ===========================================
+
+    const radios =
+    document.querySelectorAll(
+    'input[name="theme"]'
+    );
+
+    window.addEventListener("load",()=>{
+
+        const savedTheme =
+        localStorage.getItem("theme") || "system";
+
+        document.querySelector(
+    `input[value="${savedTheme}"]`
+    ).checked=true;
+
+        applyTheme(savedTheme);
+
+    });
+
+    radios.forEach(r=>{
+
+        r.addEventListener("change",()=>{
+
+            localStorage.setItem("theme",r.value);
+
+            applyTheme(r.value);
+
+        });
+
+    });
+
+    function applyTheme(theme){
+
+        document.body.classList.remove("dark");
+
+        if(theme==="dark"){
 
             document.body.classList.add("dark");
 
         }
 
-    }
+        if(theme==="system"){
 
-}
-// ===========================================
-// PDF UPLOAD
-// ===========================================
-async function uploadPDF(file){
+            if(window.matchMedia("(prefers-color-scheme:dark)").matches){
 
-    const token = localStorage.getItem("token");
+                document.body.classList.add("dark");
 
-    const formData = new FormData();
-
-    formData.append(
-        "file",
-        file
-    );
-
-    try{
-
-        const response = await fetch(
-            "/pdf/upload",
-            {
-                method:"POST",
-
-                headers:{
-                    "Authorization":`Bearer ${token}`
-                },
-
-                body:formData
             }
+
+        }
+
+    }
+    // ===========================================
+    // PDF UPLOAD
+    // ===========================================
+    async function uploadPDF(file){
+
+        const token = localStorage.getItem("token");
+
+        const formData = new FormData();
+
+        formData.append(
+            "file",
+            file
         );
 
-        const result = await response.json();
+        try{
 
-        if(!response.ok){
+            const response = await fetch(
+                "/pdf/upload",
+                {
+                    method:"POST",
 
-            alert(result.message);
+                    headers:{
+                        "Authorization":`Bearer ${token}`
+                    },
+
+                    body:formData
+                }
+            );
+
+            const result = await response.json();
+
+            if(!response.ok){
+
+                alert(result.message);
+
+                return;
+
+            }
+
+            uploadSection.style.display="none";
+            chatContainer.style.display="flex";
+
+            question.disabled=false;
+
+            sendBtn.disabled=false;
+
+            document.getElementById(
+                "chatTitle"
+            ).innerText=file.name;
+            loadPDFHistory();
+
+            alert("PDF uploaded successfully");
+
+        }
+
+        catch(error){
+
+            console.log(error);
+
+            alert("Upload failed");
+
+        }
+
+    }
+    browseBtn.addEventListener("click",()=>{
+
+        pdfInput.click();
+
+    });
+
+    pdfInput.addEventListener("change",()=>{
+
+        if(pdfInput.files.length===0){
 
             return;
 
         }
 
-        uploadSection.style.display="none";
-
-        question.disabled=false;
-
-        sendBtn.disabled=false;
-
-        document.getElementById(
-            "chatTitle"
-        ).innerText=file.name;
-
-        loadPDFHistory();
-
-        alert("PDF uploaded successfully");
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        alert("Upload failed");
-
-    }
-
-}
-browseBtn.addEventListener("click",()=>{
-
-    pdfInput.click();
-
-});
-
-pdfInput.addEventListener("change",()=>{
-
-    if(pdfInput.files.length===0){
-
-        return;
-
-    }
-
-    uploadPDF(pdfInput.files[0]);
-
-    if(window.innerWidth<=768){
-
-        closeSidebar();
-
-    }
-
-});
-
-// ===========================================
-// DRAG & DROP
-// ===========================================
-
-const uploadCard=document.querySelector(".upload-card");
-
-["dragenter","dragover"].forEach(eventName=>{
-
-    uploadCard.addEventListener(eventName,(e)=>{
-
-        e.preventDefault();
-
-        uploadCard.style.borderColor="#7c3aed";
-
-        uploadCard.style.background="#faf5ff";
-
-    });
-
-});
-
-["dragleave","drop"].forEach(eventName=>{
-
-    uploadCard.addEventListener(eventName,(e)=>{
-
-        e.preventDefault();
-
-        uploadCard.style.borderColor="";
-
-        uploadCard.style.background="";
-
-    });
-
-});
-
-uploadCard.addEventListener("drop",(e)=>{
-
-    const files=e.dataTransfer.files;
-
-    if(files.length===0) return;
-
-    pdfInput.files=files;
-
-    uploadPDF(files[0]);
-
-});
-
-// ===========================================
-// PDF HISTORY
-// ===========================================
-
-function addPdfHistory(id,name){
-
-    let todayGroup=document.querySelector(".history-group");
-
-    if(!todayGroup){
-
-        todayGroup=document.createElement("div");
-
-        todayGroup.className="history-group";
-
-        todayGroup.innerHTML=`
-        <div class="group-title">
-            Today
-        </div>
-        `;
-
-        historyContainer.prepend(todayGroup);
-
-    }
-
-    const item=document.createElement("div");
-
-    item.className="history-item";
-
-    item.innerHTML = `
-
-    <span class="material-symbols-outlined">
-
-        picture_as_pdf
-
-    </span>
-
-    <span class="pdf-name">
-
-        ${name}
-
-    </span>
-
-    <button
-        class="delete-pdf"
-        onclick="deletePDF('${id}',event)">
-
-        <span class="material-symbols-outlined">
-
-            delete
-
-        </span>
-
-    </button>
-
-`;
-
-    item.addEventListener("click",()=>{
-
-        document.querySelectorAll(".history-item")
-        .forEach(i=>i.classList.remove("active"));
-
-        item.classList.add("active");
-        selectedDocumentId = id;
-
-        chatTitle.innerText=name;
+        uploadPDF(pdfInput.files[0]);
 
         if(window.innerWidth<=768){
 
@@ -370,380 +250,583 @@ function addPdfHistory(id,name){
 
     });
 
-    todayGroup.appendChild(item);
+    // ===========================================
+    // DRAG & DROP
+    // ===========================================
 
-}
-async function loadPDFHistory(){
+    const uploadCard=document.querySelector(".upload-card");
 
-    const token = localStorage.getItem("token");
+    ["dragenter","dragover"].forEach(eventName=>{
 
-    try{
+        uploadCard.addEventListener(eventName,(e)=>{
 
-        const response = await fetch("/pdf/list",{
+            e.preventDefault();
 
-            headers:{
-                Authorization:`Bearer ${token}`
-            }
+            uploadCard.style.borderColor="#7c3aed";
 
-        });
-
-        const result = await response.json();
-
-        if(!response.ok){
-
-            return;
-
-        }
-
-        historyContainer.innerHTML="";
-
-        result.documents.forEach(pdf=>{
-
-            addPdfHistory(pdf.id, pdf.name);
+            uploadCard.style.background="#faf5ff";
 
         });
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
-
-}
-async function deletePDF(id,event){
-
-    event.stopPropagation();
-
-    if(!confirm("Delete this PDF?")){
-
-        return;
-
-    }
-
-    const token = localStorage.getItem("token");
-
-    const response = await fetch(
-
-        `/pdf/delete/${id}`,
-
-        {
-
-            method:"DELETE",
-
-            headers:{
-                Authorization:`Bearer ${token}`
-            }
-
-        }
-
-    );
-
-    const result = await response.json();
-
-    alert(result.message);
-
-    loadPDFHistory();
-
-}
-
-// ===========================================
-// SEARCH HISTORY
-// ===========================================
-
-searchInput.addEventListener("input",()=>{
-
-    const keyword=searchInput.value.toLowerCase();
-
-    document.querySelectorAll(".history-item")
-    .forEach(item=>{
-
-        item.style.display=
-        item.innerText.toLowerCase().includes(keyword)
-        ? "flex"
-        : "none";
 
     });
 
-});
+    ["dragleave","drop"].forEach(eventName=>{
 
-// ===========================================
-// NEW CHAT
-// ===========================================
+        uploadCard.addEventListener(eventName,(e)=>{
 
-document
-.getElementById("newChatBtn")
-.addEventListener("click",()=>{
+            e.preventDefault();
 
-    uploadSection.style.display="flex";
+            uploadCard.style.borderColor="";
 
-    question.disabled=true;
-
-    sendBtn.disabled=true;
-
-    question.value="";
-
-    chatTitle.innerText="AI PDF Assistant";
-
-    chatContainer.innerHTML=`
-        <div class="welcome">
-
-            <span class="material-symbols-outlined">
-                auto_awesome
-            </span>
-
-            <h2>
-                Welcome to AI PDF Assistant
-            </h2>
-
-            <p>
-                Upload a PDF and start asking questions.
-            </p>
-
-        </div>
-    `;
-
-    if(window.innerWidth<=768){
-
-        closeSidebar();
-
-    }
-
-});
-
-// ===========================================
-// LOAD USER
-// ===========================================
-
-window.addEventListener("load", () => {
-
-    const name = localStorage.getItem("name");
-    const email = localStorage.getItem("email");
-
-    if (name) {
-
-        document.getElementById("userName").textContent = name;
-        document.getElementById("modalUserName").textContent = name;
-
-        const initials = name
-            .trim()
-            .split(" ")
-            .map(word => word[0])
-            .join("")
-            .toUpperCase();
-
-        document.querySelector(".avatar").textContent = initials;
-        document.querySelector(".profile-avatar").textContent = initials;
-
-    }
-
-    if (email) {
-
-        document.getElementById("userEmail").textContent = email;
-        document.getElementById("modalUserEmail").textContent = email;
-
-    }
-    loadPDFHistory();
-    loadChatHistory();
-
-});
-
-// ===========================================
-// AUTO RESIZE TEXTAREA
-// ===========================================
-
-question.addEventListener("input", () => {
-
-    question.style.height = "56px";
-    question.style.height = question.scrollHeight + "px";
-
-});
-
-// ===========================================
-// SEND MESSAGE
-// ===========================================
-
-sendBtn.addEventListener("click", sendMessage);
-
-question.addEventListener("keydown", (e) => {
-
-    if (e.key === "Enter" && !e.shiftKey) {
-
-        e.preventDefault();
-
-        sendMessage();
-
-    }
-
-});
-async function sendMessage() {
-
-    const text = question.value.trim();
-
-    if (text === "") return;
-
-    removeWelcome();
-
-    addUserMessage(text);
-
-    question.value = "";
-
-    question.style.height = "56px";
-
-    showTyping();
-
-    const token = localStorage.getItem("token");
-
-    try {
-
-        const response = await fetch("/chat/ask", {
-
-            method: "POST",
-
-            headers: {
-
-                "Content-Type": "application/json",
-
-                "Authorization": `Bearer ${token}`
-
-            },
-
-            body: JSON.stringify({
-
-                question: text,
-                document_id: selectedDocumentId
-
-            })
+            uploadCard.style.background="";
 
         });
 
-        const result = await response.json();
+    });
 
-        hideTyping();
+    uploadCard.addEventListener("drop",(e)=>{
 
-        if (!response.ok) {
+        const files=e.dataTransfer.files;
 
-            addAIMessage(result.message);
+        if(files.length===0) return;
 
-            return;
+        pdfInput.files=files;
+
+        uploadPDF(files[0]);
+
+    });
+
+    // ===========================================
+    // PDF HISTORY
+    // ===========================================
+
+    function addPdfHistory(id,name){
+
+        let todayGroup=document.querySelector(".history-group");
+
+        if(!todayGroup){
+
+            todayGroup=document.createElement("div");
+
+            todayGroup.className="history-group";
+
+            todayGroup.innerHTML=`
+            <div class="group-title">
+                Today
+            </div>
+            `;
+
+            historyContainer.prepend(todayGroup);
 
         }
 
-        addAIMessage(result.answer);
+        const item=document.createElement("div");
 
-    }
+        item.className="history-item";
 
-    catch (error) {
+        item.innerHTML = `
 
-        hideTyping();
+        <span class="material-symbols-outlined">
 
-        console.error(error);
+            picture_as_pdf
 
-        addAIMessage("Something went wrong.");
+        </span>
 
-    }
+        <span class="pdf-name">
 
-}
+            ${name}
 
-// ===========================================
-// USER MESSAGE
-// ===========================================
+        </span>
 
-function addUserMessage(message) {
+        <button
+            class="delete-pdf"
+            onclick="deletePDF('${id}',event)">
 
-    const div = document.createElement("div");
+            <span class="material-symbols-outlined">
 
-    div.className = "message user";
+                delete
 
-    div.innerHTML = `
+            </span>
 
-        <div class="bubble">
-
-            ${message}
-
-        </div>
+        </button>
 
     `;
 
-    chatContainer.appendChild(div);
+        item.addEventListener("click",()=>{
 
-    scrollBottom();
+            document.querySelectorAll(".history-item")
+            .forEach(i=>i.classList.remove("active"));
 
-}
+            item.classList.add("active");
+            uploadSection.style.display = "none";
+            chatContainer.style.display = "flex";
+            question.disabled = false;
+            sendBtn.disabled = false;
+            selectedDocumentId = id;
+            chatTitle.innerText=name;
+            loadChatHistory();
 
-// ===========================================
-// AI MESSAGE
-// ===========================================
+            if(window.innerWidth<=768){
 
-function addAIMessage(message) {
+                closeSidebar();
 
-    const div = document.createElement("div");
-
-    div.className = "message ai";
-
-    div.innerHTML = `
-
-        <div class="bubble">
-
-            ${message}
-
-        </div>
-
-    `;
-
-    chatContainer.appendChild(div);
-
-    scrollBottom();
-
-}
-async function loadChatHistory(){
-
-    const token = localStorage.getItem("token");
-
-    try{
-
-        const response = await fetch("/chat/history",{
-
-            headers:{
-                Authorization:`Bearer ${token}`
             }
 
         });
 
-        const result = await response.json();
+        todayGroup.appendChild(item);
 
-        if(!response.ok){
+    }
+    async function loadPDFHistory(){
+
+        const token = localStorage.getItem("token");
+
+        try{
+
+            const response = await fetch("/pdf/list",{
+
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+
+            });
+
+            const result = await response.json();
+
+            if(!response.ok){
+
+                return;
+
+            }
+
+            historyContainer.innerHTML="";
+
+            result.documents.forEach(pdf=>{
+
+                addPdfHistory(pdf.id, pdf.name);
+
+            });
+            if (result.documents.length > 0) {
+
+    // Hide upload screen
+    uploadSection.style.display = "none";
+
+    // Show chat screen
+    chatContainer.style.display = "flex";
+
+    // Enable question input
+    question.disabled = false;
+
+    sendBtn.disabled = false;
+
+    selectedDocumentId = result.documents[0].id;
+
+    chatTitle.innerText = result.documents[0].name;
+
+    const firstItem = historyContainer.querySelector(".history-item");
+
+    if (firstItem) {
+
+        firstItem.classList.add("active");
+
+    }
+
+    loadChatHistory();
+
+}
+else{
+
+    // No PDFs available
+    uploadSection.style.display = "flex";
+
+    chatContainer.style.display = "none";
+
+    question.disabled = true;
+
+    sendBtn.disabled = true;
+
+    chatTitle.innerText = "AI PDF Assistant";
+
+}
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+    async function deletePDF(id,event){
+
+        event.stopPropagation();
+
+        if(!confirm("Delete this PDF?")){
 
             return;
 
         }
 
-        result.history.forEach(chat=>{
+        const token = localStorage.getItem("token");
 
-            addUserMessage(chat.question);
+        const response = await fetch(
 
-            addAIMessage(chat.answer);
+            `/pdf/delete/${id}`,
+
+            {
+
+                method:"DELETE",
+
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        loadPDFHistory();
+
+    }
+
+    // ===========================================
+    // SEARCH HISTORY
+    // ===========================================
+
+    searchInput.addEventListener("input",()=>{
+
+        const keyword=searchInput.value.toLowerCase();
+
+        document.querySelectorAll(".history-item")
+        .forEach(item=>{
+
+            item.style.display=
+            item.innerText.toLowerCase().includes(keyword)
+            ? "flex"
+            : "none";
 
         });
 
+    });
+
+    // ===========================================
+    // NEW CHAT
+    // ===========================================
+
+    document
+    .getElementById("newChatBtn")
+    .addEventListener("click",()=>{
+
+        uploadSection.style.display="flex";
+
+        chatContainer.style.display="none";
+        selectedDocumentId = null;
+
+document
+.querySelectorAll(".history-item")
+.forEach(item => item.classList.remove("active"));
+
+        question.disabled=true;
+
+        sendBtn.disabled=true;
+
+        question.value="";
+
+        chatTitle.innerText="AI PDF Assistant";
+
+        if(window.innerWidth<=768){
+
+            closeSidebar();
+
+        }
+
+    });
+
+    // ===========================================
+    // LOAD USER
+    // ===========================================
+
+    window.addEventListener("load", () => {
+
+        const name = localStorage.getItem("name");
+        const email = localStorage.getItem("email");
+
+        if (name) {
+
+            document.getElementById("userName").textContent = name;
+            document.getElementById("modalUserName").textContent = name;
+
+            const initials = name
+                .trim()
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .toUpperCase();
+
+            document.querySelector(".avatar").textContent = initials;
+            document.querySelector(".profile-avatar").textContent = initials;
+
+        }
+
+        if (email) {
+
+            document.getElementById("userEmail").textContent = email;
+            document.getElementById("modalUserEmail").textContent = email;
+
+        }
+        loadPDFHistory();   
+    });
+
+    // ===========================================
+    // AUTO RESIZE TEXTAREA
+    // ===========================================
+
+    question.addEventListener("input", () => {
+
+        question.style.height = "56px";
+        question.style.height = question.scrollHeight + "px";
+
+    });
+
+    // ===========================================
+    // SEND MESSAGE
+    // ===========================================
+
+    sendBtn.addEventListener("click", sendMessage);
+
+    question.addEventListener("keydown", (e) => {
+
+        if (e.key === "Enter" && !e.shiftKey) {
+
+            e.preventDefault();
+
+            sendMessage();
+
+        }
+
+    });
+    async function sendMessage() {
+        if (!selectedDocumentId) {
+
+    alert("Please upload or select a PDF first.");
+
+    return;
+
+}
+        const text = question.value.trim();
+
+        if (text === "") return;
+
+        removeWelcome();
+
+        addUserMessage(text);
+
+        question.value = "";
+
+        question.style.height = "56px";
+
+        showTyping();
+
+        const token = localStorage.getItem("token");
+
+        try {
+
+            const response = await fetch("/chat/ask", {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    "Authorization": `Bearer ${token}`
+
+                },
+
+                body: JSON.stringify({
+
+                    question: text,
+                    document_id: selectedDocumentId
+
+                })
+
+            });
+
+            const result = await response.json();
+
+            hideTyping();
+
+            if (!response.ok) {
+
+                addAIMessage(result.message);
+
+                return;
+
+            }
+
+            addAIMessage(result.answer);
+
+        }
+
+        catch (error) {
+
+            hideTyping();
+
+            console.error(error);
+
+            addAIMessage("Something went wrong.");
+
+        }
+
     }
 
-    catch(error){
+    // ===========================================
+    // USER MESSAGE
+    // ===========================================
 
-        console.error(error);
+    function addUserMessage(message) {
+
+        const div = document.createElement("div");
+
+        div.className = "message user";
+
+        div.innerHTML = `
+
+            <div class="bubble">
+
+                ${message}
+
+            </div>
+
+        `;
+
+        chatContainer.appendChild(div);
+
+        scrollBottom();
 
     }
+
+    // ===========================================
+    // AI MESSAGE
+    // ===========================================
+
+    function addAIMessage(message) {
+
+        const div = document.createElement("div");
+
+        div.className = "message ai";
+
+        div.innerHTML = `
+
+            <div class="bubble">
+
+                ${message}
+
+            </div>
+
+        `;
+
+        chatContainer.appendChild(div);
+
+        scrollBottom();
+
+    }
+
+
+    function showPDFWelcome(pdfName){
+
+    chatContainer.innerHTML = `
+
+        <div class="pdf-welcome" id="pdfWelcome">
+
+            <div class="pdf-big-icon">
+
+                <span class="material-symbols-outlined">
+
+                    picture_as_pdf
+
+                </span>
+
+            </div>
+
+            <h2 class="pdf-title">
+
+                ${pdfName}
+
+            </h2>
+
+            <p class="pdf-subtitle">
+
+                Ask anything about this PDF
+
+            </p>
+
+        </div>
+
+    `;
+
+}
+    async function loadChatHistory(){
+
+        const token = localStorage.getItem("token");
+
+        try{
+
+            const response = await fetch(`/chat/history?document_id=${selectedDocumentId}`,{
+
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+
+            });
+
+            const result = await response.json();
+
+            if(!response.ok){
+
+                return;
+
+            }
+            chatContainer.innerHTML = "";
+
+if(result.history.length === 0){
+
+    showPDFWelcome(chatTitle.innerText);
+
+    return;
 
 }
 
-// ===========================================
-// REMOVE WELCOME
-// ===========================================
+result.history.forEach(chat=>{
 
-function removeWelcome() {
+    addUserMessage(chat.question);
 
-    const welcome = document.querySelector(".welcome");
+    addAIMessage(chat.answer);
+
+});
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+    // ===========================================
+    // REMOVE WELCOME
+    // ===========================================
+
+    function removeWelcome() {
+
+    const welcome = document.getElementById("pdfWelcome");
 
     if (welcome) {
 
@@ -753,141 +836,141 @@ function removeWelcome() {
 
 }
 
-// ===========================================
-// TYPING
-// ===========================================
+    // ===========================================
+    // TYPING
+    // ===========================================
 
-function showTyping() {
+    function showTyping() {
 
-    typingIndicator.style.display = "block";
+        typingIndicator.style.display = "block";
 
-    scrollBottom();
+        scrollBottom();
 
-}
+    }
 
-function hideTyping() {
+    function hideTyping() {
 
-    typingIndicator.style.display = "none";
+        typingIndicator.style.display = "none";
 
-}
+    }
 
-// ===========================================
-// SCROLL
-// ===========================================
+    // ===========================================
+    // SCROLL
+    // ===========================================
 
-function scrollBottom() {
+    function scrollBottom() {
 
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
 
-}
-// ===========================================
-// LOGOUT
-// ===========================================
+    }
+    // ===========================================
+    // LOGOUT
+    // ===========================================
 
-document
-.getElementById("logoutBtn")
-.addEventListener("click", logout);
+    document
+    .getElementById("logoutBtn")
+    .addEventListener("click", logout);
 
-function logout() {
+    function logout() {
 
-    const confirmLogout = confirm(
-        "Are you sure you want to logout?"
-    );
+        const confirmLogout = confirm(
+            "Are you sure you want to logout?"
+        );
 
-    if (!confirmLogout) return;
+        if (!confirmLogout) return;
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("name");
-    localStorage.removeItem("email");
-    localStorage.removeItem("theme");
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+        localStorage.removeItem("theme");
 
-    window.location.href = "/login";
+        window.location.href = "/login";
 
-}
+    }
 
-// ===========================================
-// PREVENT DROP OUTSIDE UPLOAD CARD
-// ===========================================
+    // ===========================================
+    // PREVENT DROP OUTSIDE UPLOAD CARD
+    // ===========================================
 
-window.addEventListener("dragover", (e) => {
+    window.addEventListener("dragover", (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-});
+    });
 
-window.addEventListener("drop", (e) => {
+    window.addEventListener("drop", (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-});
+    });
 
-// ===========================================
-// HISTORY ACTIVE ITEM
-// ===========================================
+    // ===========================================
+    // HISTORY ACTIVE ITEM
+    // ===========================================
 
-document
-.querySelectorAll(".history-item")
-.forEach(item => {
+    document
+    .querySelectorAll(".history-item")
+    .forEach(item => {
 
-    item.addEventListener("click", () => {
+        item.addEventListener("click", () => {
 
-        document
-        .querySelectorAll(".history-item")
-        .forEach(i => i.classList.remove("active"));
+            document
+            .querySelectorAll(".history-item")
+            .forEach(i => i.classList.remove("active"));
 
-        item.classList.add("active");
+            item.classList.add("active");
 
-        chatTitle.innerText = item.innerText.trim();
+            chatTitle.innerText = item.innerText.trim();
 
-        if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 768) {
 
-            closeSidebar();
+                closeSidebar();
+
+            }
+
+        });
+
+    });
+
+    // ===========================================
+    // SYSTEM THEME CHANGE LISTENER
+    // ===========================================
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+
+        const theme = localStorage.getItem("theme");
+
+        if (theme === "system") {
+
+            applyTheme("system");
 
         }
 
     });
 
-});
+    // ===========================================
+    // FUTURE BACKEND HOOKS
+    // ===========================================
 
-// ===========================================
-// SYSTEM THEME CHANGE LISTENER
-// ===========================================
+    // uploadPDF(file)
+    // askQuestion(question)
+    // getChatHistory()
+    // loadUserPDFs()
+    // deletePDF(pdfId)
+    // renamePDF(pdfId)
+    // downloadPDF(pdfId)
+    // updateProfile()
+    // changePassword()
 
-window.matchMedia("(prefers-color-scheme: dark)")
-.addEventListener("change", () => {
+    // ===========================================
+    // READY
+    // ===========================================
 
-    const theme = localStorage.getItem("theme");
+    console.clear();
 
-    if (theme === "system") {
+    console.log("====================================");
 
-        applyTheme("system");
+    console.log("AI PDF Assistant Dashboard V2 Ready");
 
-    }
-
-});
-
-// ===========================================
-// FUTURE BACKEND HOOKS
-// ===========================================
-
-// uploadPDF(file)
-// askQuestion(question)
-// getChatHistory()
-// loadUserPDFs()
-// deletePDF(pdfId)
-// renamePDF(pdfId)
-// downloadPDF(pdfId)
-// updateProfile()
-// changePassword()
-
-// ===========================================
-// READY
-// ===========================================
-
-console.clear();
-
-console.log("====================================");
-
-console.log("AI PDF Assistant Dashboard V2 Ready");
-
-console.log("====================================");
+    console.log("====================================");
