@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from config import config
 from database.mongodb import client
 from routes.auth import auth_bp
@@ -15,7 +15,7 @@ app.register_blueprint(profile_bp, url_prefix="/profile")
 
 @app.route("/")
 def home():
-    return "AI PDF Assistant Backend Running"
+    return redirect(url_for("auth.register"))
 
 
 if __name__ == "__main__":

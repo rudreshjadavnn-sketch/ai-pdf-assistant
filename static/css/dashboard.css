@@ -1,51 +1,42 @@
 /* ==========================================
    RESET
 ========================================== */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:"Segoe UI",sans-serif;
 }
-
 html,
 body{
     width:100%;
     height:100%;
     overflow:hidden;
 }
-
 body{
     background:#f8fafc;
     color:#111827;
 }
-
 button{
     border:none;
     outline:none;
     cursor:pointer;
     background:none;
 }
-
 input,
 textarea{
     font-family:inherit;
 }
-
 textarea{
     resize:none;
 }
-
 a{
     text-decoration:none;
     color:inherit;
 }
-
 /* ==========================================
    OVERLAY
 ========================================== */
-
 .overlay{
     position:fixed;
     inset:0;
@@ -53,320 +44,187 @@ a{
     display:none;
     z-index:999;
 }
-
 .overlay.show{
     display:block;
 }
-
 /* ==========================================
    LAYOUT
 ========================================== */
-
 .dashboard{
     display:flex;
     width:100%;
     height:100vh;
     overflow:hidden;
 }
-
 /* ==========================================
    SIDEBAR
 ========================================== */
-
 .sidebar{
-
     width:270px;
     min-width:270px;
-    height:100vh;
-
+    height:100dvh;
     background:#ffffff;
-
     border-right:1px solid #e5e7eb;
-
     display:flex;
     flex-direction:column;
-
     transition:
     width .28s,
     min-width .28s,
     transform .28s;
-
     overflow:hidden;
-
     z-index:1000;
-
 }
-
 /* Desktop Hide */
-
 .sidebar.hidden{
-
     width:0;
     min-width:0;
-
     border-right:none;
-
 }
-
 /* Mobile Open */
-
 .sidebar.show{
-
     transform:translateX(0);
-
 }
-
 .sidebar-top{
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:20px;
-
 }
-
 .logo{
-
     display:flex;
     align-items:center;
     gap:12px;
-
 }
-
 .logo-icon{
-
     width:46px;
     height:46px;
-
     border-radius:14px;
-
     background:#7c3aed;
-
     color:#fff;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:18px;
     font-weight:700;
-
 }
-
 .logo-text{
-
     font-size:18px;
     font-weight:700;
-
     white-space:nowrap;
-
 }
-
 /* ==========================================
    ICON BUTTON
 ========================================== */
-
 .icon-btn{
-
     width:42px;
     height:42px;
-
     border-radius:12px;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     transition:.25s;
-
 }
-
 .icon-btn:hover{
-
     background:#f3f4f6;
-
 }
-
 /* ==========================================
    NEW CHAT
 ========================================== */
-
 .new-chat{
-
     margin:18px;
-
-    height:48px;
-
+    height:45px;
     background:#7c3aed;
-
     color:#fff;
-
     border-radius:14px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     gap:10px;
-
-    font-size:14px;
+    font-size:12px;
     font-weight:600;
-
     transition:.25s;
-
 }
-
 .new-chat:hover{
-
     background:#6d28d9;
-
 }
-
 /* ==========================================
    SEARCH
 ========================================== */
-
 .search-box{
-
     margin:0 18px 18px;
-
-    background:#f3f4f6;
-
+    background:#e5e6e8;
     border-radius:12px;
-
     display:flex;
     align-items:center;
-
-    padding:14px;
-
+    padding:12px;
     gap:10px;
-
 }
-
 .search-box input{
-
     flex:1;
-
     border:none;
     outline:none;
-
     background:transparent;
-
     font-size:15px;
-
 }
-
 .search-box span{
-
     color:#6b7280;
-
 }
-
 /* ==========================================
    HISTORY
 ========================================== */
-
 .history{
-
     flex:1;
-
     overflow-y:auto;
-
     padding:0 12px 12px;
-
 }
-
 .history::-webkit-scrollbar{
-
     width:6px;
-
 }
-
 .history::-webkit-scrollbar-thumb{
-
     background:#d1d5db;
-
     border-radius:50px;
-
 }
-
 .history-group{
-
     margin-bottom:22px;
-
 }
-
 .group-title{
-
     font-size:12px;
-
     font-weight:600;
-
     color:#6b7280;
-
     margin-bottom:12px;
-
     text-transform: uppercase;
-
     letter-spacing: 1px;
-
 }
-
 .history-item{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     padding:10px 12px;
-
     border-radius:12px;
-
     margin-bottom:7px;
-
     cursor:pointer;
-
     transition:.25s;
-
     font-size:14px;
-
     overflow: hidden;
 }
-
 .history-item:hover{
-
     background:#f3f4f6;
-
 }
-
-
 .history-item.active{
-
     background:#ede9fe;
-
     color:#7c3aed;
-
     font-weight:600;
-
 }
-
-.history-item span{
-
+.history-item > .material-symbols-outlined{
     font-size:22px;
-
 }
-
 .pdf-name{
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 17px;
 }
-
 .delete-pdf{
     width: 34px;
     height: 34px;
@@ -387,1094 +245,735 @@ a{
 /* ==========================================
    PROFILE
 ========================================== */
-
 .profile{
-
     margin:18px;
-
     padding:14px;
-
     border-radius:16px;
-
-    background:#f8fafc;
-
+    background:#d6e6f5;
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     transition:.25s;
-
 }
-
 .profile:hover{
-
-    background:#eef2ff;
-
+    background:#e8ecfb;
 }
-
 .avatar{
-
     width:46px;
-
     height:46px;
-
     border-radius:50%;
-
     background:#7c3aed;
-
     color:#fff;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     font-size:17px;
-
     font-weight:700;
-
 }
-
 .profile-info{
-
     flex:1;
-
     overflow:hidden;
-
 }
-
 .profile-info div:first-child{
-
     font-size:15px;
-
     font-weight:600;
-
 }
-
 .profile-info div:last-child{
-
     font-size:12px;
-
     color:#6b7280;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
-
     white-space:nowrap;
-
 }
-
 /* ==========================================
    MAIN
 ========================================== */
-
 .main{
-
     flex:1;
-
     display:flex;
-
     flex-direction:column;
     height: 100dvh;
     overflow:hidden;
-
-    background:#f8fafc;
-
+    background:#f4f6f7;
 }
-
 /* ==========================================
    TOPBAR
 ========================================== */
-
 .topbar{
     position: sticky;
     top: 0;
     z-index: 100;
     flex-shrink: 0;
-
     height:70px;
-
     background:#fff;
-
     border-bottom:1px solid #e5e7eb;
-
     display:flex;
-
     align-items:center;
-
     gap:16px;
-
     padding:0 24px;
-
 }
-
 #menuButton{
-
     display:none;
-
     width:42px;
-
     height:42px;
-
 }
-
 .topbar h2{
-
     flex:1;
-
-    font-size:22px;
-
+    min-width: 0;
+    font-size:20px;
     font-weight:700;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
-
     white-space:nowrap;
-
 }
-
 /* ==========================================
    UPLOAD
 ========================================== */
-
 .upload-section{
-
     flex:1;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:30px;
-
 }
-
 .upload-card{
-
     width:520px;
-
     max-width:100%;
-
     background:#fff;
-
     border:2px dashed #c4b5fd;
-
     border-radius:22px;
-
     padding:55px;
-
     text-align:center;
-
     transition:.3s;
-
 }
-
 .upload-card:hover{
-
     border-color:#7c3aed;
-
     transform:translateY(-4px);
-
     box-shadow:0 15px 35px rgba(124,58,237,.12);
-
 }
-
 .upload-icon{
-
     font-size:85px;
-
     color:#7c3aed;
-
 }
-
 .upload-card h1{
-
     margin:18px 0 10px;
-
     font-size:28px;
-
 }
-
 .upload-card p{
-
     color:#6b7280;
-
     margin-bottom:28px;
-
 }
-
 .upload-card button{
-
     background:#7c3aed;
-
     color:#fff;
-
     padding:14px 28px;
-
     border-radius:12px;
-
     font-size:15px;
-
     font-weight:600;
-
 }
-
 .upload-card button:hover{
-
     background:#6d28d9;
-
 }
-
 /* ==========================================
    CHAT
 ========================================== */
-
 .chat-container{
-
     flex:1;
-
     overflow-y:auto;
-
     padding:30px;
-
     display:flex;
-
     flex-direction:column;
-
     gap:20px;
     min-height: 0;
-
 }
-
 .chat-container::-webkit-scrollbar{
-
     width:6px;
-
 }
-
 .chat-container::-webkit-scrollbar-thumb{
-
     background:#d1d5db;
-
     border-radius:20px;
 }
 .chat-header{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
 }
-
 .chat-header .material-symbols-outlined{
-
     color:#7c3aed;
-
     font-size:30px;
-
 }
-
 .welcome{
-
     margin:auto;
-
     text-align:center;
-
     color:#6b7280;
-
 }
-
 .welcome span{
-
     font-size:80px;
-
     color:#7c3aed;
-
     display:block;
-
     margin-bottom:18px;
-
 }
-
 .welcome h2{
-
     margin-bottom:10px;
-
 }
-
 .message{
-
     display:flex;
-
 }
-
 .message.user{
-
     justify-content:flex-end;
-
 }
-
 .message.ai{
-
     justify-content:flex-start;
-
 }
-
 .bubble{
-
     max-width:75%;
-
     padding:16px 20px;
-
     border-radius:18px;
-
     line-height:1.7;
-
     word-break:break-word;
-
 }
-
 .message.user .bubble{
-
     background:#7c3aed;
-
     color:#fff;
-
     border-bottom-right-radius:6px;
-
 }
-
 .message.ai .bubble{
-
-    background:#fff;
-
+    background:#fefdfd;
     border:1px solid #e5e7eb;
-
     border-bottom-left-radius:6px;
-
 }
 /* ==========================================
    TYPING
 ========================================== */
-
 .typing{
-
     display:none;
-
     padding:0 30px 18px;
-
 }
-
 .typing span{
-
     width:10px;
-
     height:10px;
-
     border-radius:50%;
-
     background:#7c3aed;
-
     display:inline-block;
-
     margin-right:5px;
-
     animation:typing 1.2s infinite;
-
 }
-
 .typing span:nth-child(2){
-
     animation-delay:.2s;
-
 }
-
 .typing span:nth-child(3){
-
     animation-delay:.4s;
-
 }
-
 @keyframes typing{
-
     0%,100%{
-
         transform:translateY(0);
-
         opacity:.4;
-
     }
-
     50%{
-
         transform:translateY(-6px);
-
         opacity:1;
-
     }
-
 }
-
 /* ==========================================
    INPUT BAR
 ========================================== */
-
 .bottom-bar{
-
     flex-shrink: 0;
-
     background:#fff;
-
     border-top:1px solid #e5e7eb;
-
     padding:18px;
-
 }
-
 .input-box{
-
     display:flex;
-
     align-items:flex-end;
-
     gap:14px;
-
 }
-
 .input-box textarea{
-
     flex:1;
-
+    overflow-y: hidden;
     min-height:56px;
-
     max-height:180px;
-
     padding:16px;
-
     border:1px solid #d1d5db;
-
     border-radius:18px;
-
     outline:none;
-
     font-size:15px;
-
     background:#fff;
-
+    resize: none;
 }
 
 .input-box textarea:focus{
-
     border-color:#7c3aed;
-
 }
-
 .input-box button{
-
     width:56px;
-
     height:56px;
-
     border-radius:50%;
-
     background:#7c3aed;
-
     color:#fff;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     transition:.25s;
-
 }
-
 .input-box button:hover{
-
     background:#6d28d9;
-
 }
-
 .input-box button:disabled{
-
     background:#c4b5fd;
-
     cursor:not-allowed;
-
 }
-
 /* ==========================================
    PROFILE MODAL
 ========================================== */
-
 .profile-modal{
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.45);
-
     display:none;
-
     justify-content:center;
-
     align-items:center;
-
     z-index:2000;
-
 }
-
 .profile-modal.show{
-
     display:flex;
-
 }
-
 .profile-card{
-
     width:380px;
-
     max-width:95%;
-
     background:#fff;
-
     border-radius:24px;
-
     padding:30px;
-
     position:relative;
-
     animation:popup .25s ease;
-
 }
-
 @keyframes popup{
-
     from{
-
         opacity:0;
-
         transform:scale(.92);
-
     }
-
     to{
-
         opacity:1;
-
         transform:scale(1);
-
     }
-
 }
-
 .close-profile{
-
     position:absolute;
-
     right:18px;
-
     top:18px;
-
     width:40px;
-
     height:40px;
-
     border-radius:50%;
-
 }
-
 .close-profile:hover{
-
     background:#f3f4f6;
-
 }
-
 .profile-avatar{
-
     width:90px;
-
     height:90px;
-
     margin:auto;
-
     border-radius:50%;
-
     background:#7c3aed;
-
     color:#fff;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     font-size:34px;
-
     font-weight:700;
-
 }
-
 .profile-card h2{
-
     margin-top:18px;
-
     text-align:center;
-
 }
-
 .profile-card p{
-
     margin-top:8px;
-
     color:#6b7280;
-
     text-align:center;
-
 }
-
 .profile-divider{
-
     height:1px;
-
     background:#e5e7eb;
-
     margin:24px 0;
-
 }
-
 .theme-section h3{
-
     margin-bottom:16px;
-
 }
-
 .theme-section label{
-
     display:block;
-
     margin-bottom:12px;
-
     cursor:pointer;
-
 }
-
 .logout-btn{
-
     width:100%;
-
     height:52px;
-
     border-radius:12px;
-
     background:#ef4444;
-
     color:#fff;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:10px;
-
     font-size:15px;
-
     font-weight:600;
-
 }
-
 .logout-btn:hover{
-
     background:#dc2626;
-
 }
 /* ==========================================
    DARK THEME
 ========================================== */
-
 body.dark{
-
     background:#0f172a;
-
     color:#f8fafc;
-
 }
-
 body.dark .main{
-
     background:#0f172a;
-
 }
-
 body.dark .sidebar{
-
     background:#1e293b;
-
     border-right:1px solid #334155;
-
 }
-
 body.dark .topbar{
-
     background:#1e293b;
-
     border-bottom:1px solid #334155;
-
 }
-
 body.dark .upload-card{
-
     background:#1e293b;
-
     border-color:#7c3aed;
-
 }
-
 body.dark .bubble{
-
     background:#1e293b;
-
     color:#fff;
-
     border-color:#334155;
-
 }
-
 body.dark .message.user .bubble{
-
     background:#7c3aed;
-
 }
-
 body.dark .bottom-bar{
-
     background:#1e293b;
-
     border-top:1px solid #334155;
-
 }
-
 body.dark .profile-card{
-
     background:#1e293b;
-
     color:#fff;
-
 }
-
 body.dark .history-item:hover,
-
 body.dark .profile:hover,
-
 body.dark .icon-btn:hover{
-
     background:#334155;
-
 }
-
 body.dark textarea{
-
     background:#0f172a;
-
     color:#fff;
-
     border:1px solid #334155;
-
 }
-
 body.dark textarea::placeholder{
-
     color:#94a3b8;
-
 }
-
 body.dark .search-box{
-
     background:#334155;
-
 }
-
 body.dark .search-box input{
-
     color:#fff;
-
 }
-
 body.dark .group-title,
-
 body.dark .profile-card p,
-
 body.dark .profile-info div:last-child{
-
     color:#cbd5e1;
-
 }
-
 /* ==========================================
    MOBILE
 ========================================== */
-
 @media (max-width:768px){
-
 .main{
     height: 100dvh;
 }
-
 .sidebar{
-
     position:fixed;
-
     top:0;
-
     left:0;
-
     width:270px;
-
     min-width:270px;
-
-    height:100vh;
-
+    height:100dvh;
     transform:translateX(-100%);
-
     box-shadow:0 0 30px rgba(0,0,0,.25);
-
 }
-
 .sidebar.hidden{
-
     width:290px;
-
     min-width:290px;
-
     transform:translateX(-100%);
-
 }
-
 .sidebar.show{
-
     transform:translateX(0);
-
 }
-
 #menuButton{
-
     display:flex;
-
 }
-
 .topbar{
-
     padding:0 16px;
-
 }
-
 .topbar h2{
-
     font-size:18px;
-
 }
-
 .upload-section{
-
     padding:20px;
-
 }
-
 .upload-card{
-
     padding:35px 24px;
-
 }
-
 .upload-card h1{
-
     font-size:24px;
-
 }
-
 .upload-icon{
-
     font-size:70px;
-
 }
-
 .chat-container{
-
     padding:18px;
     min-height: 0;
-
 }
-
 .bubble{
-
     max-width:92%;
-
 }
-
 .bottom-bar{
-
-    padding:12px;
-
+    padding:13px 7px 13px 13px;
 }
-
 .input-box textarea{
-
     min-height:52px;
-
 }
-
+.input-box{
+    gap: 10px;
+}
+.input-box button{
+    height: 52px;
+    width: 52px;
+}
 .profile-card{
-
     width:92%;
-
 }
 .delete-pdf{
     opacity: 1;
 }
-
+.pdf-name{
+    font-size: 15px;
 }
-
+}
 /* ==========================================
    DESKTOP
 ========================================== */
-
 @media (min-width:769px){
-
 #menuButton{
-
     display:none;
-
 }
-
 .overlay{
-
     display:none !important;
-
 }
-
 }
-
-
-
 /* ===========================================
    PDF Welcome Screen
 =========================================== */
-
 .pdf-welcome{
-
     height:100%;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
-
     text-align:center;
-
     padding:40px;
-
 }
-
 .pdf-big-icon{
-
     width:130px;
-
     height:130px;
-
     border-radius:30px;
-
     background:linear-gradient(
         135deg,
         #8b5cf6,
         #5f15de
     );
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     box-shadow:0 15px 35px rgba(124,58,237,.25);
-
     margin-bottom:25px;
-
 }
-
 .pdf-big-icon .material-symbols-outlined{
-
     font-size:75px;
-
     color:white;
-
 }
-
 .pdf-title{
-
     font-size:20px;
-
     font-weight:700;
-
     color:#111827;
-
     margin-bottom:10px;
-
     word-break:break-word;
-
 }
-
 .pdf-subtitle{
-
     font-size:15px;
-
     color:#6b7280;
-
+}
+@media (max-width:768px){
+    .pdf-big-icon{
+        width:90px;
+        height:90px;
+    }
+    .pdf-big-icon .material-symbols-outlined{
+        font-size:50px;
+    }
+    .pdf-title{
+        font-size:26px;
+    }
+    .pdf-subtitle{
+        font-size:17px;
+    }
 }
 
-@media (max-width:768px){
+/* MAIN */
+body.dark{
+    background:#0f172a;
+    color:#f8fafc;
+}
 
-    .pdf-big-icon{
+body.dark .main{
+    background:#0f172a;
+}
 
-        width:90px;
+body.dark .topbar{
+    background:#1e293b;
+    border-color:#334155;
+}
 
-        height:90px;
+body.dark .chat-container{
+    background:#111827;
+}
 
-    }
+body.dark .bottom-bar{
+    background:#1e293b;
+    border-color:#334155;
+}
 
-    .pdf-big-icon .material-symbols-outlined{
+/* SIDEBAR */
+body.dark .sidebar{
+    background:#1e293b;
+    border-color:#334155;
+}
 
-        font-size:50px;
+body.dark .logo-text,
+body.dark .group-title{
+    color:#fff;
+}
 
-    }
+/* SEARCH */
+body.dark .search-box{
+    background:#334155;
+}
 
-    .pdf-title{
+body.dark .search-box input{
+    color:white;
+}
 
-        font-size:26px;
+body.dark .search-box input::placeholder{
+    color:#94a3b8;
+}
 
-    }
+/* HISTORY */
+body.dark .history-item{
+    color:white;
+}
 
-    .pdf-subtitle{
+body.dark .history-item:hover{
+    background:#334155;
+}
 
-        font-size:17px;
+body.dark .history-item.active{
+    background:#4f46e5;
+    color:white;
+}
 
-    }
+/* PROFILE */
+body.dark .profile{
+    background:#1a2330;
+}
 
+body.dark #userName{
+    color:white;
+}
+
+body.dark #userEmail{
+    color:#94a3b8;
+}
+
+/* CHAT */
+body.dark .message.ai .bubble{
+    background:#334155;
+    color:white;
+}
+
+body.dark .message.user .bubble{
+    background:#7c3aed;
+    color:white;
+}
+
+body.dark textarea{
+    background:#111827;
+    color:white;
+}
+
+body.dark textarea::placeholder{
+    color:#94a3b8;
+}
+
+body.dark #menuButton{
+    color: white;
+}
+
+body.dark #menuButton .material-symbols-outlined{
+    color: white;
+}
+body.dark .delete-pdf{
+    color: white;
+}
+
+body.dark .delete-pdf .material-symbols-outlined{
+    color: white;
+}
+body.dark #profileButton{
+    color: white;
+}
+
+body.dark #profileButton .material-symbols-outlined{
+    color: white;
+}
+body.dark .close-profile{
+    color: white;
+}
+
+body.dark .close-profile .material-symbols-outlined{
+    color: white;
+}
+
+body.dark .close-profile:hover{
+    background: #374151;
+}
+
+body.dark .close-profile:hover .material-symbols-outlined{
+    color: white;
+}
+
+body.dark .pdf-title{
+    color: #ffffff;
+}
+
+body.dark .pdf-subtitle{
+    color: #cbd5e1;
+}
+
+body.dark .pdf-big-icon{
+    background: #312e81;
+}
+
+body.dark .pdf-big-icon .material-symbols-outlined{
+    color: #a78bfa;
+}
+body.dark .message.ai .bubble{
+    background: #151f37;
+    border: 0.5px solid rgb(62, 61, 61);
 }

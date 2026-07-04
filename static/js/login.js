@@ -22,10 +22,11 @@ try{
     });
 
     const result = await response.json();
+    console.log(result);
     if(response.ok){
         localStorage.setItem("token",result.token);
-        localStorage.setItem("name",result.name);
-        localStorage.setItem("email",result.email)
+        localStorage.setItem("name",result.user.name);
+        localStorage.setItem("email",result.user.email)
         alert(result.message);
         window.location.href = "/dashboard";
     }
