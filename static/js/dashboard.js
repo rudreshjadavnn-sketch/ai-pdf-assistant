@@ -29,7 +29,12 @@
 
     const chatTitle = document.getElementById("chatTitle");
     let selectedDocumentId = null;
+    const token = localStorage.getItem("token");
 
+if (!token) {
+    alert("Please login first");
+    window.location.href = "/login";
+}
     // ===========================================
     // MOBILE SIDEBAR
     // ===========================================
