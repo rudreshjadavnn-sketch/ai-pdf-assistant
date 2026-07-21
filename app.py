@@ -5,6 +5,7 @@ from routes.auth import auth_bp
 from routes.pdf import pdf_bp
 from routes.chat import chat_bp
 from routes.profile import profile_bp
+import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
@@ -17,13 +18,18 @@ app.register_blueprint(profile_bp, url_prefix="/profile")
 def home():
     return redirect(url_for("auth.register"))
 
-
 if __name__ == "__main__":
     try:
         client.admin.command("ping")
-        print("Mongodb created successfully")
+        print("MongoDB connected successfully")
     except Exception as e:
-        print("Mongodb connection failed")
+        print("MongoDB connection failed")
         print(e)
 
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )
